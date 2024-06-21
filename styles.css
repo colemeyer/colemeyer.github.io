@@ -1,0 +1,157 @@
+/* Global styles */
+body {
+    background: black;
+    color: rgb(175, 175, 175);
+    font-family: "Helvetica Neue", "Sofia", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+/* 'Roboto', 'Open Sans', Arial, sans-serif */
+p {
+    font-size: 15pt;
+}
+
+/* Header */
+header {
+    color: rgb(175, 175, 175);
+    background-color: black;
+    background-size: 100%;
+    background-position: center;
+    height: 130px;
+    padding: 10px 10px 0 10px;
+    text-align: center;
+}
+
+/* Navigation */
+nav {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+nav ul li:first-child {
+    position: relative;
+    top: 0px;
+    margin-right: 100px;
+}
+nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+nav a {
+    text-decoration: none;
+    color: rgb(175, 175, 175);
+}
+nav li:not(:first-child) a:hover {
+    text-decoration: none;
+    color: rgb(52, 143, 255);
+}
+nav a.active {
+    text-decoration: none;
+    color: rgb(52, 143, 255);
+}
+
+/* About Me section */
+.about-me {
+    background-color: black;
+    color: rgb(175, 175, 175);
+    margin-left: 200px;
+    margin-right: 200px;
+    text-align: center;
+}
+.about-me figure {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    text-align: left;
+}
+.about-me figure img {
+    width: 500px;
+}
+
+/* Publications section */
+section.pub-labels {
+    background-color: black;
+    color: rgb(175, 175, 175);
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+}
+section.pubs {
+    background-color: black;
+    color: rgb(175, 175, 175);
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 250px;
+    margin-right: 250px;
+    text-align: left;
+}
+
+/* Dividers */
+.divider-top,
+.divider-bottom {
+    background-color: rgb(175, 175, 175);
+    height: 2px;
+    border-radius: 2px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+.divider-top {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+.divider-bottom {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* Spacer */
+.about-me-spacer {
+    background-color: black;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+/* Body text links */
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Special font types */
+h1.greeting {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+h1.CV {
+    font-size: 20px;
+    margin-top: 50px;
+}
+h1.normal {
+    font-weight: 300;
+    font-size: 25px;
+    margin: 10px;
+    line-height: 2
+}
+h1.normal a {
+    font-size: 25px;
+}
+h1.publications {
+    padding: 0;
+    margin: 30px 0 0 0;
+}
+h6.greeting {
+    padding: 0;
+    margin: 0;
+}
+section.pubs p {
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+}
