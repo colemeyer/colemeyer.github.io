@@ -27,8 +27,17 @@
 
     <section class="gallery">
         <div class="carousel">
-            <div class="carousel-slides" id="carouselSlides">
-                <!-- Images will be dynamically added here -->
+            <div class="carousel-slides">
+                <div class="carousel-slide">
+                    <img src="../images/Ollie/IMG_0034.jpeg">
+                </div>
+                <div class="carousel-slide">
+                    <img src="../images/Ollie/IMG_0034.jpeg">
+                </div>
+                <div class="carousel-slide">
+                    <img src="../images/Ollie/IMG_0034.jpeg">
+                </div>
+                <!-- Add more slides as needed -->
             </div>
         </div>
         <div class="carousel-counter-spacer"></div>
@@ -39,78 +48,35 @@
 
     <script>
         let slideIndex = 0;
-        let slides = [];
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
         const counter = document.querySelector('.carousel-counter');
-        let slideTimer;
-    
-        // Function to fetch images from 'Ollie' folder
-        async function fetchImages() {
-            const response = await fetch('../images/Ollie/');
-            const data = await response.text();
-            const parser = new DOMParser();
-            const htmlDocument = parser.parseFromString(data, 'text/html');
-            const images = Array.from(htmlDocument.querySelectorAll('a'))
-                .filter(a => a.href.match(/\.(jpe?g|png|gif)$/i))
-                .map(a => a.href);
-    
-            return images;
-        }
-    
-        // Function to initialize the carousel with fetched images
-        async function initCarousel() {
-            const images = await fetchImages();
-    
-            // Create carousel slides dynamically
-            const carouselSlides = document.getElementById('carouselSlides');
-            images.forEach((imageUrl, index) => {
-                const slide = document.createElement('div');
-                slide.className = 'carousel-slide';
-                const img = document.createElement('img');
-                img.src = imageUrl;
-                img.alt = `Slide ${index + 1}`;
-                slide.appendChild(img);
-                carouselSlides.appendChild(slide);
-                slides.push(slide);
-            });
-    
-            totalSlides = slides.length;
-            showSlide(slideIndex);
-            startAutoSlideTimer();
-        }
-    
+
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.style.display = (i === index) ? 'block' : 'none';
             });
             updateCounter(index);
         }
-    
+
         function moveSlide(step) {
             slideIndex = (slideIndex + step + totalSlides) % totalSlides;
             showSlide(slideIndex);
-            resetAutoSlideTimer();
         }
-    
-        function startAutoSlideTimer() {
-            slideTimer = setTimeout(autoSlide, 5000);
-        }
-    
-        function resetAutoSlideTimer() {
-            clearTimeout(slideTimer);
-            slideTimer = setTimeout(autoSlide, 5000);
-        }
-    
+
         function autoSlide() {
             moveSlide(1);
+            setTimeout(autoSlide, 5000);
         }
-    
+
         function updateCounter(index) {
-            counter.textContent = `${index + 1}/${totalSlides}`;
+            counter.textContent = ${index + 1}/${totalSlides};
         }
-    
+
         document.addEventListener('DOMContentLoaded', () => {
-            initCarousel();
-    
+            showSlide(slideIndex);
+            setTimeout(autoSlide, 5000);
+
             document.addEventListener('keydown', (event) => {
                 if (event.key === 'ArrowLeft') {
                     moveSlide(-1);
@@ -119,6 +85,6 @@
                 }
             });
         });
-    </script>    
+    </script>
 </body>
 </html>
