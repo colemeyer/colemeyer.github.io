@@ -39,6 +39,8 @@
                 </div>
                 <!-- Add more slides as needed -->
             </div>
+            <button class="carousel-button left" onclick="moveSlide(-1)">❮</button>
+            <button class="carousel-button right" onclick="moveSlide(1)">❯</button>
         </div>
         <div class="carousel-counter-spacer"></div>
         <div class="carousel-counter"></div> <!-- Counter for slide number -->
@@ -70,7 +72,7 @@
         }
 
         function updateCounter(index) {
-            counter.textContent = ${index + 1}/${totalSlides};
+            counter.textContent = `${index + 1}/${totalSlides}`;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
