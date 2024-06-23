@@ -171,19 +171,18 @@ h6.greeting {
     padding: 0;
 }
 
-/* New styles for Ollie's Adventures page */
+/* New styles for Ollie page */
 .gallery {
     background-color: black;
     color: rgb(175, 175, 175);
     margin-left: 200px;
     margin-right: 200px;
+    margin-bottom: 0px;
     text-align: center;
 }
 
 .carousel {
     position: relative;
-    max-width: 400px;
-    max-height: 400px;
     margin: auto;
     overflow: hidden;
     border-radius: 20px;
