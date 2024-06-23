@@ -27,17 +27,8 @@
 
     <section class="gallery">
         <div class="carousel">
-            <div class="carousel-slides">
-                <div class="carousel-slide">
-                    <img src="../images/Ollie/IMG_0034.jpeg">
-                </div>
-                <div class="carousel-slide">
-                    <img src="../images/Ollie/IMG_0034.jpeg">
-                </div>
-                <div class="carousel-slide">
-                    <img src="../images/Ollie/IMG_0034.jpeg">
-                </div>
-                <!-- Add more slides as needed -->
+            <div class="carousel-slides" id="carouselSlides">
+                <!-- Images will be dynamically added here -->
             </div>
         </div>
         <div class="carousel-counter-spacer"></div>
@@ -48,10 +39,49 @@
 
     <script>
         let slideIndex = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const totalSlides = slides.length;
+        let slides = [];
         const counter = document.querySelector('.carousel-counter');
         let slideTimer;
+
+        // Function to fetch images from 'Ollie' folder
+        async function fetchImages() {
+            try {
+                const response = await fetch('../images/Ollie/');
+                const data = await response.text();
+                const parser = new DOMParser();
+                const htmlDocument = parser.parseFromString(data, 'text/html');
+                const imageLinks = Array.from(htmlDocument.querySelectorAll('a'))
+                    .filter(a => /\.(jpe?g|png|gif)$/i.test(a.href))
+                    .map(a => a.href);
+
+                return imageLinks;
+            } catch (error) {
+                console.error('Error fetching images:', error);
+                return [];
+            }
+        }
+
+        // Function to initialize the carousel with fetched images
+        async function initCarousel() {
+            const images = await fetchImages();
+
+            // Create carousel slides dynamically
+            const carouselSlides = document.getElementById('carouselSlides');
+            images.forEach((imageUrl, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = `Slide ${index + 1}`;
+                slide.appendChild(img);
+                carouselSlides.appendChild(slide);
+                slides.push(slide);
+            });
+
+            totalSlides = slides.length;
+            showSlide(slideIndex);
+            startAutoSlideTimer();
+        }
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -66,8 +96,7 @@
             resetAutoSlideTimer();
         }
 
-        function autoSlide() {
-            moveSlide(1);
+        function startAutoSlideTimer() {
             slideTimer = setTimeout(autoSlide, 5000);
         }
 
@@ -76,13 +105,16 @@
             slideTimer = setTimeout(autoSlide, 5000);
         }
 
+        function autoSlide() {
+            moveSlide(1);
+        }
+
         function updateCounter(index) {
             counter.textContent = `${index + 1}/${totalSlides}`;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            showSlide(slideIndex);
-            slideTimer = setTimeout(autoSlide, 5000);
+            initCarousel();
 
             document.addEventListener('keydown', (event) => {
                 if (event.key === 'ArrowLeft') {
