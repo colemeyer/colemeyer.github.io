@@ -51,6 +51,7 @@
         const slides = document.querySelectorAll('.carousel-slide');
         const totalSlides = slides.length;
         const counter = document.querySelector('.carousel-counter');
+        let slideTimer;
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -62,11 +63,17 @@
         function moveSlide(step) {
             slideIndex = (slideIndex + step + totalSlides) % totalSlides;
             showSlide(slideIndex);
+            resetAutoSlideTimer();
         }
 
         function autoSlide() {
             moveSlide(1);
-            setTimeout(autoSlide, 5000);
+            slideTimer = setTimeout(autoSlide, 5000);
+        }
+
+        function resetAutoSlideTimer() {
+            clearTimeout(slideTimer);
+            slideTimer = setTimeout(autoSlide, 5000);
         }
 
         function updateCounter(index) {
@@ -75,7 +82,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             showSlide(slideIndex);
-            setTimeout(autoSlide, 5000);
+            slideTimer = setTimeout(autoSlide, 5000);
 
             document.addEventListener('keydown', (event) => {
                 if (event.key === 'ArrowLeft') {
