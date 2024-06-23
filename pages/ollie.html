@@ -28,9 +28,6 @@
     <section class="gallery">
         <div class="carousel">
             <div class="carousel-slides" id="carouselSlides">
-                <div class="carousel-slide">
-                    <img src="../images/Ollie/IMG_0034.jpeg">
-                </div>
                 <!-- Images will be dynamically added here -->
             </div>
         </div>
@@ -48,7 +45,7 @@
     
         // Function to fetch images from 'Ollie' folder
         async function fetchImages() {
-            const response = await fetch('https://colemeyer.github.io/images/Ollie/');
+            const response = await fetch('../images/Ollie/');
             const data = await response.text();
             const parser = new DOMParser();
             const htmlDocument = parser.parseFromString(data, 'text/html');
