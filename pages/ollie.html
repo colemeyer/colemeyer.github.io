@@ -226,61 +226,18 @@
                 <div class="carousel-slide">
                     <img src="../images/Ollie/pic2.jpeg">
                 </div>
-                <!-- Add more slides as needed -->
+                <!-- Add other slides here -->
+            </div>
+            <div class="carousel-counter">
+                <span class="carousel-counter-arrow left-arrow">&lt;</span>
+                <span class="carousel-counter-text">1 / 10</span>
+                <span class="carousel-counter-arrow right-arrow">&gt;</span>
             </div>
         </div>
-        <div class="carousel-counter-spacer"></div>
-        <div class="carousel-counter"></div> <!-- Counter for slide number -->
     </section>
 
     <div class="divider-bottom"></div>
 
-    <script>
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const totalSlides = slides.length;
-        const counter = document.querySelector('.carousel-counter');
-        let slideTimer;
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.style.display = (i === index) ? 'block' : 'none';
-            });
-            updateCounter(index);
-        }
-
-        function moveSlide(step) {
-            slideIndex = (slideIndex + step + totalSlides) % totalSlides;
-            showSlide(slideIndex);
-            resetAutoSlideTimer();
-        }
-
-        function autoSlide() {
-            moveSlide(1);
-            slideTimer = setTimeout(autoSlide, 5000);
-        }
-
-        function resetAutoSlideTimer() {
-            clearTimeout(slideTimer);
-            slideTimer = setTimeout(autoSlide, 5000);
-        }
-
-        function updateCounter(index) {
-            counter.textContent = `${index + 1}/${totalSlides}`;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            showSlide(slideIndex);
-            slideTimer = setTimeout(autoSlide, 5000);
-
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'ArrowLeft') {
-                    moveSlide(-1);
-                } else if (event.key === 'ArrowRight') {
-                    moveSlide(1);
-                }
-            });
-        });
-    </script>
+    <script src="../script.js"></script>
 </body>
 </html>
