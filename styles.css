@@ -177,12 +177,12 @@ h6.greeting {
     color: rgb(175, 175, 175);
     margin-left: 200px;
     margin-right: 200px;
-    margin-bottom: 100px;
     text-align: center;
 }
 
 .carousel {
     position: relative;
+    max-height: 300px;
     margin: auto;
     overflow: hidden;
     border-radius: 20px;
