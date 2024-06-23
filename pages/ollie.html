@@ -45,7 +45,7 @@
     
         // Function to fetch images from 'Ollie' folder
         async function fetchImages() {
-            const response = await fetch('Ollie/');
+            const response = await fetch('../images/Ollie/');
             const data = await response.text();
             const parser = new DOMParser();
             const htmlDocument = parser.parseFromString(data, 'text/html');
