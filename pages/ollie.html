@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ollie</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="180x180" href="../images/apple-touch-icon.png">
+</head>
+
+<body>
+    <header class="Ollie">
+        <nav>
+            <ul>
+                <li class="cole-meyer"><a href="../index.html">Cole Meyer</a></li>
+                <li><a href="../index.html">About Me</a></li>
+                <li><a href="../pages/research.html">Research</a></li>
+                <li><a href="../pages/publications.html">Publications</a></li>
+                <li><a href="../pages/cv.html">CV</a></li>
+                <li><a href="../pages/outreach.html">Outreach</a></li>
+                <li><a href="ollie.html" class="active">Ollie</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="divider-top"></div>
+
+    <section class="gallery">
+        <div class="carousel">
+            <div class="carousel-slides" id="carouselSlides">
+                <!-- Images will be dynamically added here -->
+            </div>
+        </div>
+        <div class="carousel-counter-spacer"></div>
+        <div class="carousel-counter"></div> <!-- Counter for slide number -->
+    </section>
+
+    <div class="divider-bottom"></div>
+
+    <script>
+        let slideIndex = 0;
+        let slides = [];
+        const counter = document.querySelector('.carousel-counter');
+        let slideTimer;
+    
+        // Function to fetch images from 'Ollie' folder
+        async function fetchImages() {
+            const response = await fetch('../images/Ollie/');
+            const data = await response.text();
+            const parser = new DOMParser();
+            const htmlDocument = parser.parseFromString(data, 'text/html');
+            const images = Array.from(htmlDocument.querySelectorAll('a'))
+                .filter(a => a.href.match(/\.(jpe?g|png|gif)$/i))
+                .map(a => a.href);
+    
+            return images;
+        }
+    
+        // Function to initialize the carousel with fetched images
+        async function initCarousel() {
+            const images = await fetchImages();
+    
+            // Create carousel slides dynamically
+            const carouselSlides = document.getElementById('carouselSlides');
+            images.forEach((imageUrl, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = `Slide ${index + 1}`;
+                slide.appendChild(img);
+                carouselSlides.appendChild(slide);
+                slides.push(slide);
+            });
+    
+            totalSlides = slides.length;
+            showSlide(slideIndex);
+            startAutoSlideTimer();
+        }
+    
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = (i === index) ? 'block' : 'none';
+            });
+            updateCounter(index);
+        }
+    
+        function moveSlide(step) {
+            slideIndex = (slideIndex + step + totalSlides) % totalSlides;
+            showSlide(slideIndex);
+            resetAutoSlideTimer();
+        }
+    
+        function startAutoSlideTimer() {
+            slideTimer = setTimeout(autoSlide, 5000);
+        }
+    
+        function resetAutoSlideTimer() {
+            clearTimeout(slideTimer);
+            slideTimer = setTimeout(autoSlide, 5000);
+        }
+    
+        function autoSlide() {
+            moveSlide(1);
+        }
+    
+        function updateCounter(index) {
+            counter.textContent = `${index + 1}/${totalSlides}`;
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            initCarousel();
+    
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowLeft') {
+                    moveSlide(-1);
+                } else if (event.key === 'ArrowRight') {
+                    moveSlide(1);
+                }
+            });
+        });
+    </script>    
+</body>
+</html>
