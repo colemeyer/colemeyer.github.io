@@ -182,8 +182,8 @@ h6.greeting {
 
 .carousel {
     position: relative;
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 400px;
+    max-height: 400px;
     margin: auto;
     overflow: hidden;
     border-radius: 20px;
