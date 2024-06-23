@@ -37,6 +37,9 @@
 
     <div class="divider-bottom"></div>
 
+    <!-- Display response contents between lines 48 and 49 -->
+    <div id="responseContents"></div>
+
     <script>
         let slideIndex = 0;
         let slides = [];
@@ -52,6 +55,9 @@
             const images = Array.from(htmlDocument.querySelectorAll('a'))
                 .filter(a => a.href.match(/\.(jpe?g|png|gif)$/i))
                 .map(a => a.href);
+    
+            // Display response contents between lines 48 and 49
+            document.getElementById('responseContents').innerHTML = data;
     
             return images;
         }
